@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumina Cafe - 心落ち着く空間</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --brown: #6b4226;
+      --light-brown: #c8956c;
+      --cream: #fdf6ee;
+      --dark: #2c1a0e;
+      --accent: #e8a87c;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: var(--cream);
+      color: var(--dark);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(253, 246, 238, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      border-bottom: 1px solid rgba(107, 66, 38, 0.1);
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--brown);
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: var(--light-brown);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--dark);
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--light-brown);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #3d2010 0%, #6b4226 50%, #c8956c 100%);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      font-weight: normal;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--accent);
+      color: var(--dark);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      border-radius: 50px;
+      transition: all 0.3s;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: white;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .concept {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .concept-text h2 {
+      font-size: 2.5rem;
+      color: var(--brown);
+      margin-bottom: 1.5rem;
+      font-weight: normal;
+      line-height: 1.3;
+    }
+
+    .concept-text p {
+      line-height: 2;
+      color: #5a4030;
+      font-size: 1rem;
+    }
+
+    .concept-image {
+      background: linear-gradient(145deg, var(--light-brown), var(--brown));
+      border-radius: 20px;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      box-shadow: 0 20px 60px rgba(107, 66, 38, 0.3);
+    }
+
+    .menu-section {
+      background: var(--brown);
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+
+    .menu-section h2 {
+      font-size: 2.5rem;
+      color: white;
+      margin-bottom: 0.5rem;
+      font-weight: normal;
+    }
+
+    .section-sub {
+      color: var(--accent);
+      letter-spacing: 3px;
+      font-size: 0.85rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .menu-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .menu-card:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-5px);
+    }
+
+    .menu-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .menu-card h3 {
+      color: white;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      font-weight: normal;
+    }
+
+    .menu-card p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .price {
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .info-section {
+      padding: 6rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .info-section h2 {
+      font-size: 2.5rem;
+      color: var(--brown);
+      font-weight: normal;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 5px 30px rgba(107, 66, 38, 0.1);
+    }
+
+    .info-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .info-card h3 {
+      color: var(--brown);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.8rem;
+    }
+
+    .info-card p {
+      color: #5a4030;
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      background: var(--dark);
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    footer .footer-logo {
+      color: white;
+      font-size: 1.4rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .concept {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      nav ul {
+        gap: 1.2rem;
+      }
+      nav a {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Lumi<span>na</span></div>
+    <ul>
+      <li><a href="#concept">コンセプト</a></li>
+      <li><a href="#menu">メニュー</a></li>
+      <li><a href="#access">アクセス</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-tag">Since 2019 · 東京 渋谷</span>
+      <h1>一杯の珈琲が<br>つなぐ時間。</h1>
+      <p>静かな朝、忙しい午後、ゆっくりとした夕暮れ。<br>どんな時間にも、あなたの隣にいたい。</p>
+      <a href="#menu" class="btn">メニューを見る</a>
+    </div>
+  </section>
+
+  <section class="concept" id="concept">
+    <div class="concept-text">
+      <h2>光と静けさが<br>交わる場所</h2>
+      <p>
+        Lumina Cafeは、2019年に東京・渋谷の路地裏に生まれました。<br><br>
+        「光（Lumen）」という言葉が示すように、ここは小さな光が集まる場所。
+        一杯のスペシャルティコーヒーと手作りのスイーツが、
+        あなたの日常に温かな灯りを届けます。<br><br>
+        豆はエチオピア・コロンビア・グアテマラの農園から直接仕入れ、
+        店内の焙煎機で週3回焙煎しています。
+      </p>
+    </div>
+    <div class="concept-image">&#9749;</div>
+  </section>
+
+  <section class="menu-section" id="menu">
+    <h2>Our Menu</h2>
+    <p class="section-sub">旬の素材と丁寧な一杯</p>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-icon">&#9749;</div>
+        <h3>シングルオリジン エスプレッソ</h3>
+        <p>その日の農園の個性を最大限に引き出した、濃厚な一杯</p>
+        <div class="price">¥ 680</div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">&#127843;</div>
+        <h3>クリーミー ラテ</h3>
+        <p>北海道産低温殺菌牛乳を使った、なめらかでやさしいラテ</p>
+        <div class="price">¥ 780</div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">&#129481;</div>
+        <h3>コールドブリュー</h3>
+        <p>12時間水出しした、透き通るような甘みとすっきりとした後味</p>
+        <div class="price">¥ 750</div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">&#127856;</div>
+        <h3>本日のケーキ</h3>
+        <p>毎朝シェフが手作りする季節のケーキ。コーヒーとのペアリングを楽しんで</p>
+        <div class="price">¥ 650〜</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section" id="access">
+    <h2>Store Info</h2>
+    <p class="section-sub">お気軽にお越しください</p>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon">&#128205;</div>
+        <h3>住所</h3>
+        <p>東京都渋谷区神南1-2-3<br>ルミナビル 1F</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">&#128336;</div>
+        <h3>営業時間</h3>
+        <p>月〜金 8:00 – 20:00<br>土・日 9:00 – 19:00<br>定休日：毎週火曜</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">&#128652;</div>
+        <h3>アクセス</h3>
+        <p>渋谷駅 ハチ公口より<br>徒歩 7分</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">&#128222;</div>
+        <h3>お問い合わせ</h3>
+        <p>03-1234-5678<br>hello@lumina-cafe.jp</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-logo">Lumina Cafe</span>
+    <p>東京都渋谷区神南1-2-3　｜　営業時間 8:00 – 20:00（火定休）</p>
+    <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.4;">© 2026 Lumina Cafe. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
